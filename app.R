@@ -49,7 +49,7 @@ ui<- dashboardPage(
     tabItems(tabItem(tabName = "dashboard",
                      h2("About Page"),
                      p("The data is collected from this "), a("website", aref = "https://data.cityofchicago.org/Transportation/CTA-Ridership-L-Station-Entries-Daily-Totals/5neh-572f"),p("it contains the stationname and rides for different dates"),
-                     "and we have also used the location of the stations which is available at this location", a("location", aref = "https://data.cityofchicago.org/Transportation/CTA-System-Information-List-of-L-Stops/8pix-ypme"),
+                     "and we have also used the location of the stations which is available at this ", a("location", aref = "https://data.cityofchicago.org/Transportation/CTA-System-Information-List-of-L-Stops/8pix-ypme"),
              p("Chicago Transit Authority published this data and it contains 
                        how many people have taken trains or buses at every stop. 
                        Data is collected from 2001 to 2021 it contains around 2 million rows and 148 stations"),
@@ -156,7 +156,7 @@ server <- function(input,output,session){
     ctapurple1 <- subset(ctadates,ctadates$P=="TRUE" & ctadates$Pexp=="TRUE")
     output$twodatesmap <- renderLeaflet({
       leaflet(options=leafletOptions(attributionControl=FALSE)) %>%
-        setView(lng = -87.649707, lat = 41.875474, zoom = 11.5)
+        setView(lng = -87.649707, lat = 41.875474, zoom = 11.5) %>% 
         addTiles() %>%
         addCircles(ctared1$Longitude,ctared1$Latitude,radius=25,color="red",group="Red",
                    label=paste("<strong>",ctared1$stationname,"</strong>","<br><strong>Difference:</strong>",
